@@ -1,0 +1,17 @@
+---
+const { name, league, country } = Astro.props;
+---
+
+<div class="bg-white rounded-lg shadow-md p-6">
+  <h2 class="text-xl font-bold">{name}</h2>
+  <p>Liga: {league}</p>
+  <p>País: {country}</p>
+  <div class="flex space-x-2">
+    <button class="text-indigo-600 hover:text-indigo-900" aria-label="Editar"
+      >Editar</button
+    >
+    <button class="text-red-600 hover:text-red-900" aria-label="Eliminar"
+      >Eliminar</button
+    >
+  </div>
+</div>

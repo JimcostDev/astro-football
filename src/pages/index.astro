@@ -2,9 +2,15 @@
 import Layout from '../layouts/Layout.astro';
 import SectionContainer from '../components/SectionContainer.astro';
 import GetTeams from '../components/GetTeams.astro';
+import GetTeamsReact from '../components/GetTeams.jsx';
 ---
 <Layout title="Welcome to Astro.">
+    <h2 class="text-2xl font-bold text-center text-blue-800 uppercase">Formulario Astro</h2>
     <SectionContainer id="get-teams">
-        <GetTeams />
+        <GetTeams/>
+    </SectionContainer>
+    <h2 class="text-2xl font-bold text-center text-blue-800 uppercase">Formulario React</h2>
+    <SectionContainer id="get-teams">
+        <GetTeamsReact client:load/>
     </SectionContainer>
 </Layout>

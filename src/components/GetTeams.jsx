@@ -40,7 +40,8 @@ const GetTeams = () => {
               <option value="La Liga">La Liga</option>
               <option value="Serie A">Serie A</option>
               <option value="Bundesliga">Bundesliga</option>
-              <option value="Ligue 1 Uber Eats">Ligue 1 Uber Eats</option>
+              <option value="Ligue 1">Ligue 1</option>
+              <option value="Liga BetPlay">Liga BetPlay</option>
             </select>
             <button
               type="submit"
@@ -62,8 +63,8 @@ const GetTeams = () => {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {getTeams.length > 0 ? (
-            getTeams.map(({ name, league, country }) => (
-              <CardTeams key={name} name={name} league={league} country={country} />
+            getTeams.map(({ _id, name, league, country }) => (
+              <CardTeams key={_id} _id={_id} name={name} league={league} country={country} />
             ))
           ) : (
             <p className="mx-5 text-wrap text-center font-light text-red-500/90">

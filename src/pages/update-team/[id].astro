@@ -1,0 +1,14 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SectionContainer from '../../components/SectionContainer.astro';
+import UpdateTeamReact from '../../components/UpdateTeam.jsx';
+
+// Captura el 'id' desde los parámetros de la ruta
+const { id } = Astro.params; // Astro.params obtiene los segmentos dinámicos de la ruta
+console.log('teamId en Astro:', id);
+---
+<Layout title="Welcome to Astro.">
+    <SectionContainer id="update-team">
+        <UpdateTeamReact client:load teamId={id} />
+    </SectionContainer>
+</Layout>

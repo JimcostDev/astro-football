@@ -12,12 +12,16 @@ export async function getAllTeamsOrGetTeamsByLeague(league = '') {
 
     try {
         const response = await fetch(urlAPI);
+
         if (!response.ok) {
             throw new Error(`No se pudo obtener la respuesta de la API, status: ${response.status}`);
         }
 
+        // Obtener los datos de la API
         const data = await response.json();
+        //console.log('Datos obtenidos:', data); // Imprime los datos obtenidos
         return data;
+        
     } catch (error) {
         console.error(`Error al obtener los datos de la API, ${error}`);
         return null;

@@ -1,4 +1,8 @@
-const CardTeams = ({ name, league, country, onEdit, onDelete }) => {
+const CardTeams = ({ _id, name, league, country, onEdit, onDelete }) => {
+  const handleEdit = () => {
+    // Redirigir a la página de actualización usando el _id
+    window.location.href = `/update-team/${_id}`;
+  };
   return (
     <div className="bg-white border border-gray-200 rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow duration-300 ease-in-out">
       <div className="mb-4">
@@ -11,11 +15,11 @@ const CardTeams = ({ name, league, country, onEdit, onDelete }) => {
         </p>
       </div>
       <div className="flex flex-col sm:flex-row gap-2">
-        <button
+        <button 
           className="text-sm inline-flex items-center justify-center gap-2 px-4 py-2
           text-tertiary bg-transparent border border-yellow-400 rounded-lg shadow-md
           hover:shadow-xl hover:bg-yellow-600/10 ease-in-out duration-500 cursor-pointer mb-2"
-          onClick={onEdit}
+          onClick={handleEdit}
         >
           ✏️ Editar
         </button>

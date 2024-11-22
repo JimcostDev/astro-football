@@ -2,10 +2,16 @@
 import Layout from '../layouts/Layout.astro';
 import SectionContainer from '../components/SectionContainer.astro';
 import GetTeamsReact from '../components/GetTeams.jsx';
+import AddIcon from '../components/icons/Add.astro';
+import Button from '../components/Button.astro';
 ---
 <Layout title="Welcome to Astro.">
     <h2 class="text-2xl font-bold text-center text-blue-800 uppercase">Listado de equipos por liga</h2>
     <SectionContainer id="get-teams">
+        <Button href="create-team" bgColor="hover:bg-green-600/10" borderColor="border-green-400">
+            <AddIcon class="size-5"/>
+            Agregar Equipo
+        </Button>  
         <GetTeamsReact client:load/>
     </SectionContainer>
 </Layout>

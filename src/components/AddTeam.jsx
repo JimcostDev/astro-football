@@ -19,19 +19,26 @@ const AddTeam = () => {
     }
   
     const newTeam = { name, league, country };
+    console.log("Datos enviados:", newTeam);
   
     try {
       setIsLoading(true);
   
-      // Usamos la función createTeam para enviar los datos del nuevo equipo
+      // Enviamos los datos del nuevo equipo
       const result = await createTeam(newTeam);
   
+      console.log("Respuesta de la API:", result); // Depuramos la respuesta completa
+  
+      // Comprobamos si la respuesta contiene el mensaje de éxito
       if (result && result.message === "Equipo creado exitosamente") {
         alert('¡Equipo agregado exitosamente!');
         // Limpiamos los campos después de guardar
         setName('');
         setLeague('');
         setCountry('');
+      } else if (result && result.detail) {
+        // Si la API devuelve un error con detalle, lo mostramos
+        alert(`Error al agregar el equipo: ${result.detail[0]?.msg || "Error desconocido"}`);
       } else {
         alert('Hubo un error al agregar el equipo.');
       }
@@ -43,6 +50,7 @@ const AddTeam = () => {
       setIsLoading(false);
     }
   };
+  
   
 
   return (

@@ -1,10 +1,9 @@
 // URL base de la API
-const PROXY_URL = 'https://api.allorigins.win/raw?url=';
 const API_URL = "https://fastapi-football.koyeb.app";
 
 // Obtener todos los equipos o equipos por liga
 export async function getAllTeamsOrGetTeamsByLeague(league = '') {
-    let urlAPI = `${PROXY_URL}${API_URL}/`;
+    let urlAPI = `${API_URL}/`;
 
     // Si se proporciona un nombre de liga, lo añadimos a la URL
     if (league) {
@@ -44,7 +43,7 @@ export async function getTeamById(teamId) {
 
 // Crear un nuevo equipo
 export async function createTeam(teamData) {
-    const urlAPI = `${PROXY_URL}${encodeURIComponent(API_URL + '/')}`;
+    const urlAPI = `${API_URL}/`;
 
     try {
         const response = await fetch(urlAPI, {

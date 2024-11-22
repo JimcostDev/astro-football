@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { createTeam } from '../services/loadData';  // Importamos la función createTeam
+import { createTeam } from '../services/loadData'; 
+import ButtonReact from './ButtonReact.jsx';
 
 const AddTeam = () => {
   // Estados para almacenar la información del equipo
@@ -55,7 +56,7 @@ const AddTeam = () => {
 
   return (
     <div className="container mx-auto max-w-xl mt-8">
-      <h1 className="text-2xl font-bold text-center">Agregar Nuevo Equipo</h1>
+      <h1 className="text-2xl font-bold text-center uppercase">Agregar Nuevo Equipo</h1>
       
       <form onSubmit={handleSubmit} className="bg-white p-6 rounded-md shadow-md mt-6">
         <div className="mb-4">
@@ -98,20 +99,22 @@ const AddTeam = () => {
         </div>
 
         <div className="flex justify-between">
-          <button
+          <ButtonReact
             type="button"
             onClick={() => window.location.href = '/'}
-            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+            bgColor="hover:bg-gray-600/10"
+            borderColor="border-gray-400"
           >
             Cancelar
-          </button>
-          <button
+          </ButtonReact>
+          <ButtonReact
             type="submit"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            bgColor="hover:bg-blue-600/10"
+            borderColor="border-blue-400"
             disabled={isLoading}
           >
             {isLoading ? 'Guardando...' : 'Guardar'}
-          </button>
+          </ButtonReact>
         </div>
       </form>
     </div>

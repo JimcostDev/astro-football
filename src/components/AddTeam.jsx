@@ -1,58 +1,72 @@
 import { useState } from 'react';
 import { createTeam } from '../services/loadData'; 
 import ButtonReact from './ButtonReact.jsx';
+import Swal from 'sweetalert2';
 
 const AddTeam = () => {
-  // Estados para almacenar la información del equipo
   const [name, setName] = useState('');
   const [league, setLeague] = useState('');
   const [country, setCountry] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  // Función para manejar el envío del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
   
-    // Verificación simple para asegurar que los campos no estén vacíos
     if (!name || !league || !country) {
-      alert('Todos los campos son requeridos.');
+      Swal.fire({
+        title: 'Error',
+        text: 'Todos los campos son requeridos.',
+        icon: 'warning',
+      });
       return;
     }
   
     const newTeam = { name, league, country };
-    console.log("Datos enviados:", newTeam);
+    console.log('Datos enviados:', newTeam);
   
     try {
       setIsLoading(true);
   
-      // Enviamos los datos del nuevo equipo
       const result = await createTeam(newTeam);
+      console.log('Respuesta de la API:', result);
   
-      console.log("Respuesta de la API:", result); // Depuramos la respuesta completa
-  
-      // Comprobamos si la respuesta contiene el mensaje de éxito
-      if (result && result.message === "Equipo creado exitosamente") {
-        alert('¡Equipo agregado exitosamente!');
-        // Limpiamos los campos después de guardar
-        setName('');
-        setLeague('');
-        setCountry('');
+      if (result && result.message === 'Equipo creado exitosamente') {
+        Swal.fire({
+          title: '¡Éxito!',
+          text: 'Equipo agregado exitosamente.',
+          icon: 'success',
+        }).then(() => {
+          // Limpiamos los campos y redirigimos si es necesario
+          setName('');
+          setLeague('');
+          setCountry('');
+          window.location.href = '/';
+        });
       } else if (result && result.detail) {
-        // Si la API devuelve un error con detalle, lo mostramos
-        alert(`Error al agregar el equipo: ${result.detail[0]?.msg || "Error desconocido"}`);
+        Swal.fire({
+          title: 'Error',
+          text: `Error al agregar el equipo: ${result.detail[0]?.msg || 'Error desconocido'}`,
+          icon: 'error',
+        });
       } else {
-        alert('Hubo un error al agregar el equipo.');
+        Swal.fire({
+          title: 'Error',
+          text: 'Hubo un error al agregar el equipo.',
+          icon: 'error',
+        });
       }
   
       setIsLoading(false);
     } catch (error) {
       console.error('Error al agregar el equipo:', error);
-      alert('Hubo un error al agregar el equipo.');
+      Swal.fire({
+        title: 'Error',
+        text: 'Hubo un error al agregar el equipo.',
+        icon: 'error',
+      });
       setIsLoading(false);
     }
   };
-  
-  
 
   return (
     <div className="container mx-auto max-w-xl mt-8">

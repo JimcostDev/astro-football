@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getTeamById, updateTeam } from '../services/loadData';
+import Swal from 'sweetalert2';
 
 const UpdateTeamReact = ({ teamId }) => {
   const [team, setTeam] = useState(null);
@@ -9,7 +10,7 @@ const UpdateTeamReact = ({ teamId }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    console.log('teamId recibido:', teamId); // Verifica que el id está llegando al componente
+    console.log('teamId recibido:', teamId);
 
     const fetchTeamData = async () => {
       if (!teamId) {
@@ -28,20 +29,28 @@ const UpdateTeamReact = ({ teamId }) => {
         }
       } catch (error) {
         console.error('Error al obtener los datos del equipo:', error);
-        alert('Hubo un error al cargar los datos del equipo.');
+        Swal.fire({
+          title: 'Error',
+          text: 'Hubo un error al cargar los datos del equipo.',
+          icon: 'error',
+        });
       }
     };
 
     if (teamId) {
       fetchTeamData();
     }
-  }, [teamId]); // Vuelve a cargar cuando el 'teamId' cambie
+  }, [teamId]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!name || !league || !country) {
-      alert('Todos los campos son requeridos.');
+      Swal.fire({
+        title: 'Atención',
+        text: 'Todos los campos son requeridos.',
+        icon: 'warning',
+      });
       return;
     }
 
@@ -51,16 +60,30 @@ const UpdateTeamReact = ({ teamId }) => {
       setIsLoading(true);
       const result = await updateTeam(teamId, updatedTeam);
 
-      if (result && result.message === "Equipo actualizado exitosamente") {
-        alert('¡Equipo actualizado exitosamente!');
+      if (result && result.message === 'Equipo actualizado exitosamente') {
+        Swal.fire({
+          title: '¡Éxito!',
+          text: 'Equipo actualizado exitosamente.',
+          icon: 'success',
+        }).then(() => {
+          window.location.href = '/'; // Redirigir al usuario después de confirmar el mensaje
+        });
       } else {
-        alert('Hubo un error al actualizar el equipo.');
+        Swal.fire({
+          title: 'Error',
+          text: 'Hubo un error al actualizar el equipo.',
+          icon: 'error',
+        });
       }
 
       setIsLoading(false);
     } catch (error) {
       console.error('Error al actualizar el equipo:', error);
-      alert('Hubo un error al actualizar el equipo.');
+      Swal.fire({
+        title: 'Error',
+        text: 'Hubo un error al actualizar el equipo.',
+        icon: 'error',
+      });
       setIsLoading(false);
     }
   };

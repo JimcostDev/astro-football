@@ -1,4 +1,5 @@
 ---
+  // Lógica de Astro si es necesaria, pero no se requiere JavaScript en este caso.
 ---
 
 <header class="bg-gray-50 shadow-md">
@@ -8,7 +9,7 @@
       JimcostDev Football
     </a>
 
-    <!-- Menú de Navegación -->
+    <!-- Menú de Navegación para pantallas grandes -->
     <nav class="hidden md:flex space-x-6">
       <a href="/" class="text-gray-700 hover:text-green-700 transition duration-300 ease-in-out">
         Inicio
@@ -18,15 +19,26 @@
       </a>
     </nav>
 
-    <!-- Menú Hamburguesa para Móviles -->
+    <!-- Menú Hamburguesa para pantallas pequeñas -->
     <div class="md:hidden">
-      <button 
-        id="menu-toggle" 
-        class="text-gray-700 hover:text-green-700 focus:outline-none transition duration-300 ease-in-out">
+      <input type="checkbox" id="menu-toggle" class="hidden peer" />
+      <label for="menu-toggle" class="text-gray-700 hover:text-green-700 focus:outline-none transition duration-300 ease-in-out cursor-pointer">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
         </svg>
-      </button>
+      </label>
+
+      <!-- Menú desplegable para móviles -->
+      <nav class="absolute left-0 right-0 bg-gray-50 shadow-md mt-4 md:hidden transform transition-transform duration-300 ease-in-out peer-checked:block hidden">
+        <div class="space-y-4 p-6">
+          <a href="/" class="text-gray-700 hover:text-green-700 transition duration-300 ease-in-out block">
+            Inicio
+          </a>
+          <a href="https://www.jimcostdev.com" target="_blank" class="text-gray-700 hover:text-green-700 transition duration-300 ease-in-out block">
+            Sobre mí
+          </a>
+        </div>
+      </nav>
     </div>
   </div>
 </header>
